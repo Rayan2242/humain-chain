@@ -112,3 +112,19 @@ contract HumainChaine is ERC721URIStorage, Ownable {
         return false;
     }
 }
+
+mapping(uint256 => ContentCert) public certificates;
+
+    event ContentCertified(address indexed user, uint256 indexed tokenId, string tag, string platform);
+
+    constructor() ERC721("HumainChaine", "HCH") {
+        tokenCounter = 0;
+    }
+
+    function mintCertificate(
+        string memory _contentHash,
+        string memory _platform,
+        string memory _contentLink,
+        string memory _tag,
+        string memory _tokenURI
+    ) public {
