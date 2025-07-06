@@ -94,3 +94,21 @@ contract HumainChaine is ERC721URIStorage, Ownable {
         string contentLink;
         string tag;
     }
+
+    function getCertificate(uint256 _tokenId) public view returns (ContentCert memory) {
+        return certificates[_tokenId];
+    }
+
+    function totalMinted() public view returns (uint256) {
+        return tokenCounter;
+    }
+
+    function isContentAlreadyCertified(string memory _contentHash) public view returns (bool) {
+        for (uint256 i = 0; i < tokenCounter; i++) {
+            if (keccak256(bytes(certificates[i].contentHash)) == keccak256(bytes(_contentHash))) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
