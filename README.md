@@ -79,3 +79,18 @@ describe("HumainChaine", function () {
     expect(cert.contentHash).to.equal(hash);
   });
 });
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract HumainChaine is ERC721URIStorage, Ownable {
+    uint256 public tokenCounter;
+
+    struct ContentCert {
+        string contentHash;
+        string platform;
+        string contentLink;
+        string tag;
+    }
