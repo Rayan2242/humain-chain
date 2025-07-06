@@ -44,3 +44,20 @@ contract HumainChaine is ERC721URIStorage, Ownable {
         return certificates[_tokenId];
     }
 }
+
+process.exitCode
+
+const hre = require("hardhat");
+
+async function main() {
+  const HumainChaine = await hre.ethers.getContractFactory("HumainChaine");
+  const contract = await HumainChaine.deploy();
+  await contract.deployed();
+
+  console.log("Contract deployed to:", contract.address);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
