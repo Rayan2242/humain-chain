@@ -61,3 +61,21 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+testing :
+const { expect } = require("chai");
+
+describe("HumainChaine", function () {
+  it("should mint a certificate", async function () {
+    const [owner] = await ethers.getSigners();
+    const Contract = await ethers.getContractFactory("HumainChaine");
+    const hc = await Contract.deploy();
+    await hc.deployed();
+
+    const hash = ethers.utils.sha256(ethers.utils.toUtf8Bytes("hello world"));
+    await hc.mintCertificate(hash, "Twitter", "https://link", "human", "ipfs://test");
+
+    const cert = await hc.getCertificate(0);
+    expect(cert.contentHash).to.equal(hash);
+  });
+});
